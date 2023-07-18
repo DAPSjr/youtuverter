@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, url_for
 from pytube import Playlist, YouTube
 
@@ -11,23 +12,24 @@ def index():
 def download():
     url = request.json.get("url")
     try:
+        download_folder = os.path.join(os.path.dirname(__file__), "songs")
+        os.makedirs(download_folder, exist_ok=True)
+
         if "playlist" in url:
             playlist = Playlist(url)
             playlist.populate_video_urls()
             total_videos = len(playlist.video_urls)
             counter = 1
-            output_path = "D:/DESCARGAS"
             for video_url in playlist.video_urls:
                 yt = YouTube(video_url)
                 video = yt.streams.filter(only_audio=True).first()
-                video.download(output_path=output_path)
+                video.download(output_path=download_folder)
                 counter += 1
             return f"Descarga exitosa ({counter-1}/{total_videos})", 200
         else:
             yt = YouTube(url)
             video = yt.streams.filter(only_audio=True).first()
-            output_path = "D:/DESCARGAS"
-            video.download(output_path=output_path)
+            video.download(output_path=download_folder)
             return "Descarga exitosa (1/1)", 200
     except Exception as e:
         return str(e), 500

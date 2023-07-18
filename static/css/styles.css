@@ -1,15 +1,21 @@
 body {
-    background-color: #fbf7ed;
+    background-image: url(../multimedia/images/background/music_background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 15%;
+    overflow: hidden;
 }
 
 .container {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px;
     text-align: center;
-    background-color: #fdf6e8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    background-color: rgba(255, 255, 255, 0.7); /* Utilizamos el valor rgba para agregar opacidad */
+    box-shadow: 10px 5px 10px rgba(24, 0, 243, 0.2);
+    border-radius: 10px;
+  }
+  
 
 h1 {
     margin-bottom: 20px;
